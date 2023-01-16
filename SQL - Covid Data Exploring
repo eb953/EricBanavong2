@@ -2,3 +2,6 @@ Select *
 From PortfolioProject..CovidDeaths
 Where continent is not null 
 order by 3,4
+
+
+Analyzing Covid data to determine vaccination effects on total deaths
