@@ -1,7 +1,13 @@
+-- Analyzing Covid-19 Data from https://ourworldindata.org/covid-deaths
+-- Using Microsoft SQL Server Management Studio 
+
+-- Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
+
+
+Analyzing Covid data to determine vaccination effects on total deaths
+
 Select *
 From PortfolioProject..CovidDeaths
 Where continent is not null 
 order by 3,4
 
-
-Analyzing Covid data to determine vaccination effects on total deaths
