@@ -1,1 +1,28 @@
+--Table 1
 
+Select Sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, Sum(cast(new_deaths as float)) / Sum(cast(new_cases as float)) *100 as DeathPercentage
+From Portfolio..CovidDeaths
+Where continent is not null
+Order by 1,2
+
+
+-- Table 2
+
+Select continent, Max(total_deaths) as TotalDeathCount
+From Portfolio..CovidDeaths
+Where continent is not null
+Group by continent 
+Order by TotalDeathCount desc
+
+-- Table 3
+Select Location, population, Max(total_cases) as MaximumInfectionCount, Max((cast(total_cases as float) / population)) * 100 AS PercentPopulationInfected
+From Portfolio..CovidDeaths
+Group by Location, Population
+Order by PercentPopulationInfected desc
+
+-- Table 4
+
+Select Location, population, date, Max(total_cases) as MaximumInfectionCount, Max((cast(total_cases as float) / population)) * 100 AS PercentPopulationInfected
+From Portfolio..CovidDeaths
+Group by Location, Population, date
+Order by PercentPopulationInfected desc
