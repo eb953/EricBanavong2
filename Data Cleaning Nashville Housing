@@ -14,7 +14,7 @@ Set SaleDateConverted = Convert(Date, SaleDate)
 
 
 
--- Populate Property Address Data
+-- Populate Property Address Data, Some of the addresses are re 
 
 Select *
 From Portfolio..NashvilleHousing 
@@ -36,3 +36,31 @@ Join Portfolio..NashvilleHousing b
 	on a.parcelid = b.parcelid
 		and a.[uniqueid] <> b.[UniqueID] 
 Where a.propertyaddress is null
+
+
+
+
+--Breaking out Address into Individual Columns (address, City, State) 
+
+Select PropertyAddress
+From Portfolio..NashvilleHousing 
+
+Select 
+Substring(PropertyAddress, 1, Charindex(',', PropertyAddress) -1) as Address, -- going to position 1 of the property address string and stopping at the delimiter (,) as the result. The -1 position so that result does not include comma
+Substring(PropertyAddress, Charindex(',', PropertyAddress) +1, Len(PropertyAddress)) as City -- going to the delimiter then adding 1 more position past to result the length of the rest of the string
+From Portfolio..NashvilleHousing 
+
+Alter Table NashvilleHousing
+Add PropertySplitAddress Nvarchar(255); 
+
+Update NashvilleHousing
+Set PropertySplitAddress = Substring(PropertyAddress, 1, Charindex(',', PropertyAddress) -1) 
+
+Alter Table NashvilleHousing
+Add PropertySplitCity Nvarchar(255); 
+
+Update NashvilleHousing
+Set PropertySplitCity = Substring(PropertyAddress, Charindex(',', PropertyAddress) +1, Len(PropertyAddress)) 
+
+Select *
+From Portfolio..NashvilleHousing --testing result 
