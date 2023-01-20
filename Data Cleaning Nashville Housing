@@ -1,1 +1,38 @@
+-- Standardize Date Format 
+Select SaleDateConverted, Convert(Date, SaleDate)
+From Portfolio..NashvilleHousing 
 
+Update NashvilleHousing
+Set SaleDate = Convert(Date, SaleDate)
+
+
+Alter Table NashvilleHousing
+Add SaleDateConverted Date; 
+
+Update NashvilleHousing
+Set SaleDateConverted = Convert(Date, SaleDate)
+
+
+
+-- Populate Property Address Data
+
+Select *
+From Portfolio..NashvilleHousing 
+--Where PropertyAddress is Null
+Order by ParcelID
+
+
+Select a.parcelid, a.propertyaddress, b.parcelid, b.propertyaddress, isnull(a.propertyaddress, b.propertyaddress)
+From Portfolio..NashvilleHousing a
+Join Portfolio..NashvilleHousing b
+	on a.parcelid = b.parcelid
+		and a.[uniqueid] <> b.[UniqueID] 
+Where a.propertyaddress is null
+
+Update a
+Set PropertyAddress = isnull(a.propertyaddress, b.propertyaddress)
+From Portfolio..NashvilleHousing a
+Join Portfolio..NashvilleHousing b
+	on a.parcelid = b.parcelid
+		and a.[uniqueid] <> b.[UniqueID] 
+Where a.propertyaddress is null
