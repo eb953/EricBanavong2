@@ -1,4 +1,6 @@
---Table 1
+Link to Tableau Dashboard: https://public.tableau.com/views/CovidDashBoard2023/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
+
+--Table 1 (Global Numbers)
 
 Select Sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, Sum(cast(new_deaths as float)) / Sum(cast(new_cases as float)) *100 as DeathPercentage
 From Portfolio..CovidDeaths
@@ -6,7 +8,7 @@ Where continent is not null
 Order by 1,2
 
 
--- Table 2
+-- Table 2 (Total Death Count by Continent)
 
 Select continent, Max(total_deaths) as TotalDeathCount
 From Portfolio..CovidDeaths
@@ -14,13 +16,13 @@ Where continent is not null
 Group by continent 
 Order by TotalDeathCount desc
 
--- Table 3
+-- Table 3 (Percent Population Infected)
 Select Location, population, Max(total_cases) as MaximumInfectionCount, Max((cast(total_cases as float) / population)) * 100 AS PercentPopulationInfected
 From Portfolio..CovidDeaths
 Group by Location, Population
 Order by PercentPopulationInfected desc
 
--- Table 4
+-- Table 4 (Percent Population Infected Per Country)
 
 Select Location, population, date, Max(total_cases) as MaximumInfectionCount, Max((cast(total_cases as float) / population)) * 100 AS PercentPopulationInfected
 From Portfolio..CovidDeaths
