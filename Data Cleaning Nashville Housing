@@ -64,3 +64,39 @@ Set PropertySplitCity = Substring(PropertyAddress, Charindex(',', PropertyAddres
 
 Select *
 From Portfolio..NashvilleHousing --testing result 
+
+
+
+-- Ownderaddress separate as property address. Used Parsename instead 
+
+Select Owneraddress
+From Portfolio..NashvilleHousing
+
+
+Select 
+Parsename(Replace(Owneraddress, ',','.'), 3) as Address
+, Parsename(Replace(Owneraddress, ',','.'), 2) As City
+, Parsename(Replace(Owneraddress, ',','.'), 1) As State
+From Portfolio..NashvilleHousing
+
+
+Alter Table NashvilleHousing
+Add OwnerSplitAddress Nvarchar(255); 
+
+Update NashvilleHousing
+Set OwnerSplitAddress = Parsename(Replace(Owneraddress, ',','.'), 3)
+
+Alter Table NashvilleHousing
+Add OwnerSplitCity Nvarchar(255); 
+
+Update NashvilleHousing
+Set OwnerSplitCity = Parsename(Replace(Owneraddress, ',','.'), 2)
+
+Alter Table NashvilleHousing
+Add OwnerSplitState Nvarchar(255); 
+
+Update NashvilleHousing
+Set OwnerSplitState = Parsename(Replace(Owneraddress, ',','.'), 1)
+
+Select *
+From Portfolio..NashvilleHousing --testing result 
