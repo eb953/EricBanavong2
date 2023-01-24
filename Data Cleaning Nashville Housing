@@ -103,3 +103,32 @@ Set OwnerSplitState = Parsename(Replace(Owneraddress, ',','.'), 1)
 
 Select *
 From Portfolio..NashvilleHousing --testing result 
+
+
+
+-- Change Y and N to Yes and No 
+
+-- Finding out how many Y, N, yes, and no there are in the soldasvacant column
+
+Select Distinct(SoldAsVacant), Count(SoldAsVacant)
+From Master..NashvilleHousing
+Group by soldasvacant
+Order by 2
+
+-- Using case, changing y and n to yes and no 
+
+Select SoldAsVacant
+,    Case when SoldasVacant = 'y' then 'yes'
+         when SoldasVacant = 'n' then 'no'
+         Else soldasvacant
+         END
+From Master..NashvilleHousing
+
+--Updating changes into the original table nashvillehousing
+
+Update Nashvillehousing 
+Set Soldasvacant = Case when SoldasVacant = 'y' then 'yes'
+         when SoldasVacant = 'n' then 'no'
+         Else soldasvacant
+         END
+From Master..nashvillehousing
