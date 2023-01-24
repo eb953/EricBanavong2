@@ -15,7 +15,9 @@ Set SaleDateConverted = Convert(Date, SaleDate)
 
 
 
--- Populate Property Address Dates. There are duplicate parcelId's with same address yet have different unique ID. I join the table with itself on parcelID
+-- Populate Property Address Dates. There are duplicate parcelId's with same address yet have different unique ID. Some of the duplicate parcelID's have 
+empty addresses. To fix this I join the table with itself on parcel ID. If parcelID A has address and second same parcelID B does not have address. 
+I populate ParcelID B address with ParcelID A address. 
 
 Select *
 From Portfolio..NashvilleHousing 
