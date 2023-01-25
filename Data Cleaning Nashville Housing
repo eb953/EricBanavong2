@@ -1,3 +1,6 @@
+--first part using Microsoft Sql Studio 
+
+
 -- Standardize Date Format 
 
 Select SaleDateConverted, Convert(Date, SaleDate)
@@ -105,7 +108,7 @@ Select *
 From Portfolio..NashvilleHousing --testing result 
 
 
-
+--Second part run using Azure Data Studio 
 -- Change Y and N to Yes and No 
 
 -- Finding out how many Y, N, yes, and no there are in the soldasvacant column
