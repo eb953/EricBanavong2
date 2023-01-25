@@ -132,3 +132,44 @@ Set Soldasvacant = Case when SoldasVacant = 'y' then 'yes'
          Else soldasvacant
          END
 From Master..nashvillehousing
+
+
+
+-- Remove Duplicates 
+
+-- Below Query will select rows that are duplicates 
+
+With RowNumCTE As( 
+Select *, 
+    Row_Number() Over (
+        Partition by ParcelID,
+        PropertyAddress,
+        SalePrice,
+        SaleDate,
+        LegalReference
+        Order by UniqueId
+    ) row_num
+From Master..NashvilleHousing 
+)
+Select *
+From RowNumCTE
+Where Row_NUM > 1
+Order by PropertyAddress
+
+--changing line 154 with DELETE will remove duplicates from table 
+
+With RowNumCTE As( 
+Select *, 
+    Row_Number() Over (
+        Partition by ParcelID,
+        PropertyAddress,
+        SalePrice,
+        SaleDate,
+        LegalReference
+        Order by UniqueId
+    ) row_num
+From Master..NashvilleHousing 
+)
+Delete 
+From RowNumCTE
+Where Row_NUM > 1
