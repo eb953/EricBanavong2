@@ -1,5 +1,6 @@
---first part using Microsoft Sql Studio 
-
+-- This project will focus on data cleaning in SQL. I focused on the Nashville Housing data that can be found in my portfolio. 
+-- First part using Microsoft Sql Studio on Windows 10
+-- Second part on Apple Macbook using Azure Data Studio running Microsoft SQL Studio in Docker Container
 
 -- Standardize Date Format 
 
@@ -108,7 +109,8 @@ Select *
 From Portfolio..NashvilleHousing --testing result 
 
 
---Second part run using Azure Data Studio 
+-- Switched to Azure Data Studio running Microsoft SQL Studio. Updated table with previous queries. 
+
 -- Change Y and N to Yes and No 
 
 -- Finding out how many Y, N, yes, and no there are in the soldasvacant column
@@ -159,7 +161,7 @@ From RowNumCTE
 Where Row_NUM > 1
 Order by PropertyAddress
 
---changing line 154 with DELETE will remove duplicates from table 
+--changing line 159 with DELETE will remove duplicates from table 
 
 With RowNumCTE As( 
 Select *, 
