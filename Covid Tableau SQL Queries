@@ -1,5 +1,8 @@
 Link to Tableau Dashboard: https://public.tableau.com/views/CovidDashBoard2023/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
 
+-- Goal: Visualizing data from queries provided by Covid Data Exploring project 
+
+
 --Table 1 (Global Numbers)
 
 Select Sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, Sum(cast(new_deaths as float)) / Sum(cast(new_cases as float)) *100 as DeathPercentage
